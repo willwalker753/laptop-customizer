@@ -1,107 +1,59 @@
 import React, { Component } from 'react';
-import slugify from 'slugify';
-import FeatureRadio from './components/FeatureRadio';
-import FieldSet from './components/FieldSet';
 import './App.css';
-
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD'
-});
+import FEATURES from './index';
+import MainForm from './components/MainForm'
+import MainSummary from './components/MainSummary'
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: {
-        Processor: {
-          name: '17th Generation Intel Core HB (7 Core with donut spare)',
-          cost: 700
-        },
-        'Operating System': {
-          name: 'Ubuntu Linux 16.04',
-          cost: 200
-        },
-        'Video Card': {
-          name: 'Toyota Corolla 1.5v',
-          cost: 1150.98
-        },
-        Display: {
-          name: '15.6" UHD (3840 x 2160) 60Hz Bright Lights and Knobs',
-          cost: 1500
-        }
-      }
-    };
-  } 
+    constructor(props){
+        super(props);
+        this.state = {
+            features: FEATURES,
+            selected: { },
+        };
+        this.handleClick = this.handleClick.bind(this)
+        this.total = this.total.bind(this)
+    }
+    handleClick(name, cost, title) {
+        const selected = Object.assign({}, this.state.selected);
+        selected[title] = [name, cost]
+  
+        this.setState({
+            selected
+        });
 
-  updateFeature = (feature, newValue) => {
-    const selected = Object.assign({}, this.state.selected);
-    selected[feature] = newValue;
-    this.setState({
-      selected
-    });
-  };
-
-  render() {
-    const features = Object.keys(this.props.features).map((feature, idx) => {
-    const featureHash = feature + '-' + idx;
-    const options = this.props.features[feature].map(item => {
-    const itemHash = slugify(JSON.stringify(item));
+        this.total()
+    }
+    total = () => {
+        let sum = 0
+        Object.keys(this.state.selected).map(key => {
+            sum += this.state.selected[key][1]
+        })
+        return sum;
+    }
     
+    render () {
         return (
-          <>
-            <FeatureRadio itemHash={itemHash} feature={feature} item={item}/>
-            <FieldSet featureHash={featureHash} feature={feature} options={options} />
-          </>
-        );
-      });
-
-    const summary = Object.keys(this.state.selected).map((feature, idx) => {
-      const featureHash = feature + '-' + idx;
-      const selectedOption = this.state.selected[feature];
-
-      return (
-        <div className="summary__option" key={featureHash}>
-          <div className="summary__option__label">{feature} </div>
-          <div className="summary__option__value">{selectedOption.name}</div>
-          <div className="summary__option__cost">
-            {USCurrencyFormat.format(selectedOption.cost)}
-          </div>
-        </div>
-      );
-    });
-
-    const total = Object.keys(this.state.selected).reduce(
-      (acc, curr) => acc + this.state.selected[curr].cost,
-      0
-    );
-
-    return (
-      <div className="App">
-        <header>
-          <h1>ELF Computing | Laptops</h1>
-        </header>
-        <main>
-          <form className="main__form">
-            <h2>Customize your laptop</h2>
-            {features}
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {summary}
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {USCurrencyFormat.format(total)}
-              </div>
+            <div className="App">
+                <header>
+                    <h1>ELF Computing</h1>
+                    <h3>Laptops</h3>
+                    <h5>Customize your laptop</h5>  
+                </header>      
+                <main>
+                    <MainForm
+                        features={this.state.features}
+                        selected={this.state.selected}
+                        onClick={this.handleClick} 
+                    />
+                    <MainSummary 
+                        selected={this.state.selected}
+                        total={this.total()}
+                    />
+                </main>
             </div>
-          </section>
-        </main>
-      </div>
-    );
-    
-  }
+        );
+    }
 }
 
-
-export default App;
+export default App

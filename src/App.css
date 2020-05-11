@@ -75,6 +75,9 @@ while keeping them available to the keyboard */
   overflow: hidden;
 }
 
+.feature:hover {
+  cursor: pointer;
+}
 .feature__label {
   display: block;
   padding: 0.8rem;
@@ -110,6 +113,10 @@ while keeping them available to the keyboard */
     'value value';
   padding: 0.2rem;
   margin-top: 1rem;
+  border: solid;
+  border-width: 1px;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .summary__option__label {
