@@ -4,8 +4,8 @@ import Specs from './Specs';
 
 function MainForm(props) {
     return (
-        <section className="main__form" role="region">
-            <h3>TECH SPECS AND CUSTOMIZATIONS</h3>
+        <section className="main__form">
+            <h3>Customize your laptop</h3>
             {Object.keys(props.features)
                 .map((key, index, title) => 
                     <Specs

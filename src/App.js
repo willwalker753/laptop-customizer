@@ -9,7 +9,7 @@ class App extends Component {
         super(props);
         this.state = {
             features: FEATURES,
-            selected: { },
+            selected: {},
         };
         this.handleClick = this.handleClick.bind(this)
         this.total = this.total.bind(this)
@@ -26,6 +26,7 @@ class App extends Component {
     }
     total = () => {
         let sum = 0
+        // eslint-disable-next-line
         Object.keys(this.state.selected).map(key => {
             sum += this.state.selected[key][1]
         })
@@ -36,9 +37,8 @@ class App extends Component {
         return (
             <div className="App">
                 <header>
-                    <h1>ELF Computing</h1>
-                    <h3>Laptops</h3>
-                    <h5>Customize your laptop</h5>  
+                    <h2>ELF Computing | Laptops</h2>
+                    
                 </header>      
                 <main>
                     <MainForm

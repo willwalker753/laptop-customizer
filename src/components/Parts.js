@@ -14,7 +14,7 @@ class Parts extends React.Component {
         selectedColor() {
                 const selectedName = Object.keys(this.props.selected).map(key => this.props.selected[key][0])
                         if (selectedName.includes(this.props.name)) {
-                                return 'lightgreen';
+                                return 'rgb(21, 91, 255)';
                         }
                 return "";
         }
@@ -22,13 +22,13 @@ class Parts extends React.Component {
         render() {
                 return (
                         <div className="feature" >
-                                        <li key={this.props.index} className="feature__item"
-                                        onClick={() => this.handleClick()}
-                                        style={{backgroundColor: this.selectedColor()}}
-                                        >
-                                        <div className="feature_option">
-                                                {this.props.name} (${this.props.cost})
-                                        </div>
+                                <li key={this.props.index} className="feature__item"
+                                onClick={() => this.handleClick()}
+                                style={{borderColor: this.selectedColor()}}
+                                >
+                                <div className="feature_option">
+                                        {this.props.name} (${this.props.cost})
+                                </div>
                                 </li>
                         </div>
                 )

@@ -42,10 +42,14 @@ main {
   flex: 4;
 }
 
+.feature__list {
+  list-style: none;
+  padding-left: 0px;
+}
+
 .feature {
   padding: 0.8rem;
   padding-top: 0.4rem;
-  border: 0;
 }
 
 .feature + .feature {
@@ -58,21 +62,14 @@ main {
   font-weight: bold;
 }
 
-.feature__item + .feature__item {
+.feature__item {
   margin-top: 0.8rem;
-}
-
-/* Hide radios from sighted users,
-while keeping them available to the keyboard */
-.feature__option {
-  position: absolute !important;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-  clip: rect(1px, 1px, 1px, 1px);
-  padding: 0 !important;
-  border: 0 !important;
-  height: 1px !important;
-  width: 1px !important;
-  overflow: hidden;
+  border: solid;
+  border-color: rgb(199, 199, 199);
+  border-width: 2px;
+  border-radius: 5px;
+  padding-left: 10px;
+ 
 }
 
 .feature:hover {
@@ -113,10 +110,7 @@ while keeping them available to the keyboard */
     'value value';
   padding: 0.2rem;
   margin-top: 1rem;
-  border: solid;
-  border-width: 1px;
   padding: 8px;
-  border-radius: 8px;
 }
 
 .summary__option__label {
