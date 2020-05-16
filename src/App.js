@@ -9,8 +9,26 @@ class App extends Component {
         super(props);
         this.state = {
             features: FEATURES,
-            selected: {},
-        };
+            selected: {
+                "Processor": [
+                    "17th Generation Intel Core HB (7 Core with donut spare)",
+                    700
+                ],
+                "Operating System": [
+                    "Ubuntu Linux 16.04",
+                    200
+                ],
+                "Video Card": [
+                    "Toyota Corolla 1.5v",
+                    1150.98
+                ],
+                "Display": [
+                    '15.6" UHD (3840 x 2160) 60Hz Bright Lights and Knobs',
+                    1500
+                ],
+            },
+            "total": 3550.98
+         };
         this.handleClick = this.handleClick.bind(this)
         this.total = this.total.bind(this)
     }
